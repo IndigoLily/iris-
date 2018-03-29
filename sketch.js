@@ -37,7 +37,7 @@ window.addEventListener('resize', () => {
 
 function calcOffs(_w = 1, _s = speeds) {
   let t = Date.now();
-  let offs = _s.map(s => sin(t * s * 0.001) + 1);
+  let offs = _s.map(s => sin(t * s * 0.0005) + 1);
   let sum = offs.reduce((sum, n) => sum + n, 0);
   //return offs.map(n => 1/offs.length * _w); // evenly spaced for debugging
   return offs.map(n => n / sum * _w);
