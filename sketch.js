@@ -9,10 +9,9 @@ for (let i = 0; i < 10; i++) {
   speeds[i] = Math.random() + 1;
 }
 
-function calcOffs(width = w) {
+function calcOffs(_w = 1) {
   let t = Date.now();
   let offs = speeds.map(s => Math.sin(t * s * 0.003) + 1);
   let sum = offs.reduce((sum, n) => sum + n, 0);
-  offs = offs.map(n => n / sum * width);
-  return offs;
+  return offs.map(n => n / sum * _w);
 }
