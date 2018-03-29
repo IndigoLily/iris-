@@ -1,12 +1,26 @@
 const canvas = document.getElementById('cnv');
 const c = canvas.getContext('2d');
 
-let w = canvas.width  = innerWidth;
-let h = canvas.height = innerHeight;
+var w, h, r1, r2;
 
-c.strokeStyle = '#fff';
-c.lineWidth = Math.sqrt(2);
-c.translate(w/2, h/2);
+var speeds = [];
+for (let i = 0; i < 100; i++) {
+  speeds[i] = Math.random() + 1;
+}
+
+window.addEventListener('load', () => {
+  w = canvas.width  = innerWidth;
+  h = canvas.height = innerHeight;
+
+  c.strokeStyle = '#fff';
+  c.lineWidth = Math.sqrt(2);
+  c.translate(w/2, h/2);
+
+  r1 = Math.min(w,h)/2.5;
+  r2 = Math.min(w,h)/8;
+
+  draw();
+});
 
 window.addEventListener('resize', () => {
   w = canvas.width  = innerWidth;
@@ -15,12 +29,10 @@ window.addEventListener('resize', () => {
   c.strokeStyle = '#fff';
   c.lineWidth = Math.sqrt(2);
   c.translate(w/2, h/2);
-});
 
-let speeds = [];
-for (let i = 0; i < (w+h)/Math.PI/10; i++) {
-  speeds[i] = Math.random() + 1;
-}
+  r1 = Math.min(w,h)/2.5;
+  r2 = Math.min(w,h)/8;
+});
 
 function calcOffs(_w = 1, _s = speeds) {
   let t = Date.now();
@@ -33,9 +45,6 @@ function calcOffs(_w = 1, _s = speeds) {
 function polToCart(a, r) {
   return [Math.sin(a) * r, Math.cos(a) * r];
 }
-
-let r1 = h/2.5,
-    r2 = h/4;
 
 function draw() {
   c.clearRect(-w/2,-h/2,w,h);
@@ -60,5 +69,3 @@ function draw() {
 
   requestAnimationFrame(draw);
 }
-
-draw();
